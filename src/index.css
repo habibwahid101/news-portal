@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-bengali-sans: "Noto Sans Bengali", "Hind Siliguri", sans-serif;
+  --font-bengali-serif: "Tiro Bangla", serif;
+  
+  --color-primary: #b71c1c;
+  --color-primary-dark: #7f0000;
+  --color-primary-light: #ef5350;
+  --color-accent: #f57f17;
+  --color-charcoal: #1a1a1a;
+}
+
+body {
+  font-family: var(--font-bengali-sans);
+}
+
+.font-serif-bengali {
+  font-family: var(--font-bengali-serif);
+}
+

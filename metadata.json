@@ -1,0 +1,6 @@
+{
+  "name": "Aporadh Ghoshona - News Portal",
+  "description": "An elite Bengali Jatiya Saptahik (National Weekly) news portal and publication engine with analytics, editorial admin dashboard, and cloud synchronization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
