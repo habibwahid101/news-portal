@@ -29,11 +29,10 @@ export default function App() {
   // Page Scroll Progress Bar for immersive reading
   const [readProgress, setReadProgress] = useState(0);
 
-  // Force path to /admin by default if on the index route so the reviewer sees the Editorial login page immediately
   const [currentUrlPath, setCurrentUrlPath] = useState(
     typeof window !== 'undefined' 
-      ? (window.location.pathname === '/' ? '/admin' : window.location.pathname) 
-      : '/admin'
+      ? window.location.pathname 
+      : '/'
   );
 
   useEffect(() => {
