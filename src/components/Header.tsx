@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Menu, Search, X, BookOpen, AlertTriangle } from 'lucide-react';
 import { Settings, Article } from '../types';
-import logoImg from '../assets/images/aporadh_logo_1781636495378.jpg';
+import logoImg from '../assets/images/aporadh_logo.jpg';
 
 interface HeaderProps {
   settings: Settings;
