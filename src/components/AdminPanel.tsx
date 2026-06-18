@@ -57,6 +57,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
   
   const [postsSearch, setPostsSearch] = useState('');
   const [alert, setAlert] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
+  const [publishSuccess, setPublishSuccess] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -280,6 +281,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
         authorId: currentPost.authorId || loggedInUser.id
       });
       notify('✅ সংবাদটি সফলভাবে সংরক্ষিত হয়েছে!');
+      setPublishSuccess(true);
+      setTimeout(() => setPublishSuccess(false), 2500);
       setIsEditingPost(false);
       loadData();
     } catch (e: any) {
@@ -377,6 +380,20 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
 
   return (
     <div id="admin-panel-overlay" className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] flex flex-col justify-end lg:justify-center p-0 lg:p-6 font-bengali-sans">
+
+      {/* PUBLISHED SUCCESS POPUP */}
+      {publishSuccess && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center pointer-events-none">
+          <div className="bg-white rounded-2xl shadow-2xl px-12 py-10 flex flex-col items-center gap-4 animate-in zoom-in duration-300 border border-green-100">
+            <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center">
+              <svg className="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p className="text-2xl font-extrabold text-green-600 font-serif-bengali">{t('প্রকাশিত হয়েছে!', 'Published!')}</p>
+          </div>
+        </div>
+      )}
       <div className="bg-white w-full lg:max-w-7xl lg:mx-auto h-[100vh] lg:h-[90vh] lg:rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300">
         
         {/* UPPER TITLE BAR */}
@@ -566,7 +583,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
                     className="flex items-center gap-1.5 bg-primary hover:bg-primary-dark text-white text-xs font-bold px-3.5 py-2 rounded-lg transition-colors cursor-pointer"
                   >
                     <Plus size={16} />
-                    নতুন সংবাদ
+                    {t('নতুন সংবাদ', 'Add News')}
                   </button>
                 </div>
 
@@ -870,13 +887,13 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
                           onClick={() => setIsEditingPost(false)}
                           className="bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs font-bold px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
                         >
-                          ফিরে যান
+                          {t('ফিরে যান', 'Back')}
                         </button>
                         <button 
                           onClick={savePost}
                           className="bg-primary hover:bg-primary-dark text-white text-xs font-bold px-5 py-2.5 rounded-lg shadow-sm transition-colors cursor-pointer"
                         >
-                          ভ্যালিডেট ও সংরক্ষণ করুন
+                          {t('ভ্যালিডেট ও সংরক্ষণ করুন', 'Publish')}
                         </button>
                       </div>
 
