@@ -11,7 +11,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { Hero } from './Hero';
 import { NewsCard } from './NewsCard';
 
-const CATS = ['লিড', 'সিটি কর্পোরেশন', 'বন্দর', 'হাসপাতাল', 'মহানগর', 'জেলা উপজেলা', 'প্রেস রিলিজ'];
+const CATS = ['লিড', 'সব খবর', 'জাতীয়', 'মহানগর', 'বিনোদন', 'রাজনীতি', 'অর্থনীতি', 'আন্তজার্তিক', 'খেলাধূলা', 'জেলা উপজেলা', 'কক্সবাজার', 'পার্বত্য চট্টগ্রাম', 'চাকুরী', 'তথ্য প্রযুক্তি', 'শিক্ষা', 'সম্পাদকীয়', 'উপ-সম্পাদকীয়', 'সারাদেশ', 'স্বাস্থ্য', 'হাসপাতাল', 'সিটি কর্পোরেশন', 'বন্দর', 'প্রেস রিলিজ'];
 
 interface AdminPanelProps {
   onClose: () => void;
@@ -698,10 +698,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
                   </div>
 
                   {/* 2-Column Responsive Split */}
-                  <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+                  <div className="flex flex-col gap-6 items-start">
                     
                     {/* LEFT PANEL: The article form input (7/12 width on XL) */}
-                    <div className="xl:col-span-7 flex flex-col gap-4">
+                    <div className="w-full flex flex-col gap-4">
                       
                       <div className="flex flex-col gap-1.5">
                         <label className="text-xs font-bold text-gray-700">সংবাদের শিরোনাম *</label>
@@ -866,142 +866,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
                         >
                           ভ্যালিডেট ও সংরক্ষণ করুন
                         </button>
-                      </div>
-
-                    </div>
-
-                    {/* RIGHT PANEL: LIVE HOME PAGE PREVIEW (5/12 width on XL) */}
-                    <div className="xl:col-span-5 bg-slate-100 p-4 rounded-xl border border-gray-200 flex flex-col gap-4 self-stretch lg:sticky lg:top-4 overflow-y-auto max-h-[85vh] shadow-inner font-sans">
-                      
-                      {/* Device Selector / Browser Controls */}
-                      <nav className="flex justify-between items-center bg-white p-2.5 rounded-lg border border-gray-200 shadow-sm flex-wrap gap-2">
-                        <div className="flex items-center gap-1.5">
-                          <Eye size={16} className="text-primary animate-pulse" />
-                          <span className="text-xs font-bold text-gray-700 font-serif-bengali">লাইভ হোমপেজ প্রিভিউ</span>
-                        </div>
-                        <div className="flex items-center bg-slate-100 rounded-md p-0.5 border border-slate-200">
-                          <button
-                            onClick={() => setPreviewDevice('desktop')}
-                            className={`p-1.5 rounded transition-all flex items-center gap-1 text-[10px] font-bold ${
-                              previewDevice === 'desktop' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-700'
-                            }`}
-                            title="ڈেস্কটপ ভিউ"
-                          >
-                            <Monitor size={12} />
-                            ডেস্কটপ
-                          </button>
-                          <button
-                            onClick={() => setPreviewDevice('tablet')}
-                            className={`p-1.5 rounded transition-all flex items-center gap-1 text-[10px] font-bold ${
-                              previewDevice === 'tablet' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-700'
-                            }`}
-                            title="ট্যাবলেট ভিউ"
-                          >
-                            <Tablet size={12} />
-                            ট্যাবলেট
-                          </button>
-                          <button
-                            onClick={() => setPreviewDevice('mobile')}
-                            className={`p-1.5 rounded transition-all flex items-center gap-1 text-[10px] font-bold ${
-                              previewDevice === 'mobile' ? 'bg-white text-primary shadow-sm' : 'text-gray-500 hover:text-gray-700'
-                            }`}
-                            title="মোবাইল ভিউ"
-                          >
-                            <Smartphone size={12} />
-                            মোবাইল
-                          </button>
-                        </div>
-                      </nav>
-
-                      {/* Device Simulator Shell container */}
-                      <div className="flex-1 flex justify-center bg-slate-200 rounded-lg p-2 overflow-hidden border border-slate-300 min-h-[450px]">
-                        <div 
-                          className="bg-white rounded border border-gray-300 shadow-md flex flex-col overflow-y-auto overflow-x-hidden transition-all duration-300 bg-slate-50 relative"
-                          style={{
-                            width: previewDevice === 'mobile' ? '360px' : previewDevice === 'tablet' ? '640px' : '100%',
-                            maxHeight: '650px',
-                            fontSize: previewDevice === 'mobile' ? '12px' : '14px'
-                          }}
-                        >
-                          {/* Simulated Browser URL bar */}
-                          <div className="sticky top-0 bg-slate-100 border-b border-gray-200 px-3 py-1.5 flex items-center gap-2 select-none shrink-0 z-50">
-                            <div className="flex gap-1">
-                              <span className="w-2.5 h-2.5 rounded-full bg-red-400 inline-block"></span>
-                              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
-                              <span className="w-2.5 h-2.5 rounded-full bg-green-400 inline-block"></span>
-                            </div>
-                            <div className="flex-1 bg-white border border-gray-200 rounded text-[9px] text-gray-500 px-2 py-0.5 truncate text-center select-all font-mono">
-                              https://oporadhghoshona.com/home
-                            </div>
-                            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping inline-block"></span>
-                          </div>
-
-                          {/* Simulated Homepage Body */}
-                          <div className="p-3 flex flex-col gap-4 font-sans text-gray-800 bg-white min-h-[600px] select-none">
-                            
-                            {/* Newspaper Brand Banner */}
-                            <div className="text-center border-b-4 border-double border-slate-900 pb-2">
-                              <h1 className="font-serif-bengali font-black text-2xl text-slate-900 tracking-tight text-shadow-sm">
-                                {settings?.siteName || 'অপরাধ ঘোষণা'}
-                              </h1>
-                              <p className="text-[10px] text-gray-500 font-medium tracking-wide">
-                                {settings?.tagline || 'সত্যের পক্ষে হেলে পড়া, মিথ্যার বিরুদ্ধে লড়াই করা...'}
-                              </p>
-                              <div className="border-t border-slate-300 mt-1 pt-1 flex justify-between text-[8px] font-bold text-gray-400 uppercase tracking-widest px-2 font-mono">
-                                <span className="truncate max-w-[120px]">সম্পাদক: {settings?.editorName || 'মোঃ আসিফ হোসাইন'}</span>
-                                <span>তারিখ: {new Date().toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                              </div>
-                            </div>
-
-                            {/* Breaking Ticker displaying the title being modified in real time */}
-                            <div className="bg-red-600 text-white py-1 px-2.5 rounded text-[10px] flex gap-2 items-center overflow-hidden">
-                              <span className="bg-white text-red-600 text-[8px] font-extrabold px-1.5 py-0.5 rounded animate-pulse shrink-0 tracking-widest uppercase">ব্রেকিং নিউজ</span>
-                              <div className="whitespace-nowrap font-semibold border-none bg-transparent text-white w-full animate-pulse truncate text-[9px]">
-                                {currentPost.title || settings?.breakingNews || 'খবর সবিস্তারে দেখতে সঙ্গে থাকুন...'}
-                              </div>
-                            </div>
-
-                            {/* Main Section Header */}
-                            <h4 className="text-[11px] font-bold text-gray-800 border-b border-primary pb-0.5 flex justify-between items-center font-serif-bengali">
-                              <span>📰 আজকের তাজা খবর (লাইভ আপডেট)</span>
-                              <span className="text-[8px] bg-red-100 text-primary font-bold px-1 rounded">লাইভ</span>
-                            </h4>
-
-                            {/* The Real-Time Hero Grid Section */}
-                            <div className="pointer-events-none transform scale-95 origin-top select-none border border-slate-100 rounded-lg p-1 bg-slate-50">
-                              <Hero posts={publishedArticlesForPreview} onArticleClick={() => {}} />
-                            </div>
-
-                            {/* Category Blocks of Homepage */}
-                            <div className="flex flex-col gap-4 font-serif-bengali">
-                              {['লিড', 'সিটি কর্পোরেশন', 'বন্দর', 'হাসপাতাল', 'মহানগর', 'জেলা উপজেলা', 'District & Sub-district', 'District Info', 'প্রেস রিলিজ'].map(cat => {
-                                // Fallback / matching both English and Bengali labels
-                                const bngCat = cat === 'District Info' || cat === 'District & Sub-district' || cat === 'জেলা উপজেলা' ? 'জেলা উপজেলা' : cat;
-                                const catPosts = publishedArticlesForPreview.filter(p => p.categories?.includes(bngCat) || p.categories?.includes(cat) || p.category === bngCat || p.category === cat).slice(0, 3);
-                                if (catPosts.length === 0) return null;
-                                return (
-                                  <div key={cat} className="bg-slate-50 p-2.5 rounded border border-gray-150 text-[11px]">
-                                    <div className="flex justify-between items-center pb-1 border-b border-rose-300 mb-2">
-                                      <span className="font-serif-bengali text-xs font-black text-rose-950">{bngCat}</span>
-                                      <span className="text-[8px] font-sans text-gray-400">৩টি সংবাদ খণ্ড</span>
-                                    </div>
-                                    <div className={`grid gap-3 ${previewDevice === 'mobile' ? 'grid-cols-1' : 'grid-cols-3'} pointer-events-none transform scale-95 origin-top`}>
-                                      {catPosts.map(p => (
-                                        <NewsCard key={p.id} post={p} onClick={() => {}} />
-                                      ))}
-                                    </div>
-                                  </div>
-                                );
-                              })}
-                            </div>
-
-                            {/* Mock Footer */}
-                            <div className="text-center font-mono text-[8px] text-gray-400 border-t border-gray-100 pt-3 mt-2">
-                              © {settings?.siteName || 'অপরাধ ঘোষণা'} — সর্বস্বত্ব সংরক্ষিত ও সুরক্ষিত
-                            </div>
-
-                          </div>
-                        </div>
                       </div>
 
                     </div>
