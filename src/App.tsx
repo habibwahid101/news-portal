@@ -310,7 +310,7 @@ export default function App() {
                 <Hero posts={publishedArticles} onArticleClick={handleArticleClick} />
                 
                 {/* Categorized Stack Blocks */}
-                {['লিড', 'সিটি কর্পোরেশন', 'বন্দর', 'হাসপাতাল', 'মহানগর', 'জেলা উপজেলা', 'প্রেস রিলিজ'].map(cat => {
+                {['লিড', 'জাতীয়', 'মহানগর', 'বিনোদন', 'রাজনীতি', 'অর্থনীতি', 'আন্তজার্তিক', 'খেলাধূলা', 'জেলা উপজেলা', 'কক্সবাজার', 'পার্বত্য চট্টগ্রাম', 'চাকুরী', 'তথ্য প্রযুক্তি', 'শিক্ষা', 'সম্পাদকীয়', 'উপ-সম্পাদকীয়', 'সারাদেশ', 'স্বাস্থ্য', 'হাসপাতাল', 'সিটি কর্পোরেশন', 'বন্দর', 'প্রেস রিলিজ'].map(cat => {
                   const catPosts = publishedArticles.filter(p => p.categories?.includes(cat) || p.category === cat).slice(0, 3);
                   if (catPosts.length === 0) return null;
                   return (
