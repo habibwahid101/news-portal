@@ -21,6 +21,7 @@ interface AdminPanelProps {
 
 export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, loggedInUser }) => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'articles' | 'categories' | 'users' | 'ads' | 'epaper' | 'settings' | 'database' | 'password'>('dashboard');
+  const [lang, setLang] = useState<'bn' | 'en'>('bn');
   const [posts, setPosts] = useState<Article[]>([]);
   const [users, setUsers] = useState<Profile[]>([]);
   const [cats, setCats] = useState<Category[]>([]);
@@ -371,6 +372,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
     ];
   };
 
+  // Translation helper
+  const t = (bn: string, en: string) => lang === 'bn' ? bn : en;
+
   return (
     <div id="admin-panel-overlay" className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] flex flex-col justify-end lg:justify-center p-0 lg:p-6 font-bengali-sans">
       <div className="bg-white w-full lg:max-w-7xl lg:mx-auto h-[100vh] lg:h-[90vh] lg:rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300">
@@ -382,13 +386,21 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
             <span className="hidden sm:inline-block bg-amber-500 text-slate-950 text-xs font-bold px-2.5 py-1 rounded-full">{loggedInUser.role.toUpperCase()} প্যানেল</span>
           </div>
           <div className="flex items-center gap-3">
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLang(lang === 'bn' ? 'en' : 'bn')}
+              className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-bold px-3 py-2 rounded-lg transition-all cursor-pointer border border-white/20"
+              title="Switch Language"
+            >
+              {lang === 'bn' ? '🇧🇩 বাংলা' : '🇬🇧 English'}
+            </button>
             <button 
               onClick={onLogout} 
               className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-lg transition-all cursor-pointer border border-red-500/30 shadow-sm"
-              title="লগআউট"
+              title={t('লগআউট', 'Logout')}
             >
               <LogOut size={16} />
-              <span>লগআউট</span>
+              <span>{t('লগআউট', 'Logout')}</span>
             </button>
             <button onClick={onClose} className="p-2 rounded-full hover:bg-white/10 transition-colors" title="বন্ধ করুন">
               <X size={20} />
@@ -408,7 +420,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
               }`}
             >
               <LayoutDashboard size={18} />
-              ড্যাশবোর্ড
+              {t('ড্যাশবোর্ড', 'Dashboard')}
             </button>
             <button
               onClick={() => { setActiveTab('articles'); setIsEditingPost(false); }}
@@ -417,7 +429,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
               }`}
             >
               <FileText size={18} />
-              সংবাদসমূহ
+              {t('সংবাদসমূহ', 'Articles')}
             </button>
             <button
               onClick={() => { setActiveTab('password'); setIsEditingPost(false); }}
@@ -437,7 +449,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
                   }`}
                 >
                   <Layers size={18} />
-                  ক্যাটাগরি
+                  {t('ক্যাটাগরি', 'Categories')}
                 </button>
                 <button
                   onClick={() => { setActiveTab('users'); setIsEditingPost(false); }}
@@ -446,7 +458,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
                   }`}
                 >
                   <Users size={18} />
-                  ব্যবহারকারী
+                  {t('ব্যবহারকারী', 'Users')}
                 </button>
                 <button
                   onClick={() => { setActiveTab('ads'); setIsEditingPost(false); }}
@@ -455,7 +467,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
                   }`}
                 >
                   <Megaphone size={18} />
-                  বিজ্ঞাপন স্লাইডার
+                  {t('বিজ্ঞাপন স্লাইডার', 'Ad Slider')}
                 </button>
                 <button
                   onClick={() => { setActiveTab('epaper'); setIsEditingPost(false); }}
@@ -464,7 +476,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
                   }`}
                 >
                   <BookOpen size={18} />
-                  ই-পেপার PDF
+                  {t('ই-পেপার PDF', 'E-Paper PDF')}
                 </button>
                 <button
                   onClick={() => { setActiveTab('settings'); setIsEditingPost(false); }}
@@ -473,7 +485,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
                   }`}
                 >
                   <GearIcon size={18} />
-                  সেটিংস কনফিগ
+                  {t('সেটিংস কনফিগ', 'Settings')}
                 </button>
                 <button
                   onClick={() => { setActiveTab('database'); setIsEditingPost(false); }}
@@ -482,7 +494,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
                   }`}
                 >
                   <Database size={18} />
-                  ক্লাউড ডেটাবেস
+                  {t('ক্লাউড ডেটাবেস', 'Cloud Database')}
                 </button>
               </>
             )}
