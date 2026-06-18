@@ -60,6 +60,25 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Resolve a shared /news/:id link (or browser back/forward) to the right view,
+  // once posts are loaded. Without this, every shared article link just opens
+  // the homepage instead of that specific article.
+  useEffect(() => {
+    if (posts.length === 0) return;
+    const newsMatch = currentUrlPath.match(/^\/news\/(\d+)$/);
+    if (newsMatch) {
+      const id = parseInt(newsMatch[1], 10);
+      const found = posts.find(p => p.id === id);
+      if (found) {
+        setActiveArticleId(id);
+        setCurrentPage('article');
+      }
+    } else if (currentUrlPath === '/') {
+      setCurrentPage('home');
+      setActiveArticleId(null);
+    }
+  }, [posts, currentUrlPath]);
+
   const loadData = async () => {
     const p = await DBService.getArticles();
     const s = await DBService.getSettings();
@@ -86,6 +105,9 @@ export default function App() {
     } else {
       setCurrentPage('home');
       setActiveArticleId(null);
+      if (typeof window !== 'undefined') {
+        window.history.pushState({}, '', '/');
+      }
     }
   };
 
@@ -105,6 +127,9 @@ export default function App() {
     setActiveArticleId(id);
     setCurrentPage('article');
     window.scrollTo(0, 0);
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', `/news/${id}`);
+    }
   };
 
   const doLogin = async (e: React.FormEvent) => {
