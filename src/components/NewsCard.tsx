@@ -89,40 +89,42 @@ export const NewsCard: React.FC<NewsCardProps> = ({ post, onClick, variant = 'gr
   return (
     <div 
       onClick={onClick}
-      className="bg-white rounded-lg border border-gray-200 overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow group flex flex-col justify-between"
+      className="bg-white rounded-lg border border-gray-200 overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-shadow group flex flex-row md:flex-col justify-between"
     >
-      <div className="overflow-hidden relative pb-[56.25%] bg-gray-100 border-b-2 border-primary">
+      {/* Image — left on mobile, top on desktop */}
+      <div className="w-28 flex-shrink-0 md:w-full overflow-hidden relative md:pb-[56.25%] bg-gray-100 border-r-2 md:border-r-0 md:border-b-2 border-primary">
         <img 
           src={imgUrl} 
           alt={post.title} 
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full md:absolute md:inset-0 object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
       </div>
-      <div className="p-4 flex-1 flex flex-col justify-between">
+      {/* Text — right on mobile, below on desktop */}
+      <div className="p-3 md:p-4 flex-1 flex flex-col justify-between min-w-0">
         <div>
-          <div className="flex flex-wrap gap-1 mb-2">
+          <div className="flex flex-wrap gap-1 mb-1.5 md:mb-2">
             {(post.categories || [post.category]).map(cat => (
               <span key={cat} className="text-[10px] font-bold text-primary bg-red-50 px-2 py-0.5 rounded">
                 {cat}
               </span>
             ))}
           </div>
-          <h3 className="font-serif-bengali text-base sm:text-lg font-bold text-gray-900 line-clamp-2 leading-snug group-hover:text-primary transition-colors duration-150">
+          <h3 className="font-serif-bengali text-sm md:text-lg font-bold text-gray-900 line-clamp-3 leading-snug group-hover:text-primary transition-colors duration-150">
             {post.title}
           </h3>
-          <p className="text-xs sm:text-sm text-gray-500 line-clamp-2 mt-2 leading-relaxed">
+          <p className="hidden md:block text-xs sm:text-sm text-gray-500 line-clamp-2 mt-2 leading-relaxed">
             {post.excerpt}
           </p>
         </div>
-        <div className="flex items-center gap-3 text-[10px] sm:text-xs text-gray-400 mt-4 pt-3 border-t border-gray-100">
+        <div className="flex items-center gap-2 text-[10px] text-gray-400 mt-2 md:mt-4 md:pt-3 md:border-t md:border-gray-100">
           <span className="flex items-center gap-1 font-medium">
-            <Calendar size={12} className="text-gray-300" />
+            <Calendar size={11} className="text-gray-300" />
             {post.date}
           </span>
-          <span className="text-gray-200">•</span>
-          <span className="flex items-center gap-1 font-medium">
-            <User size={12} className="text-gray-300" />
+          <span className="text-gray-200 hidden md:inline">•</span>
+          <span className="hidden md:flex items-center gap-1 font-medium">
+            <User size={11} className="text-gray-300" />
             {post.author}
           </span>
         </div>
