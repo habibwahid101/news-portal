@@ -126,9 +126,7 @@ export const Header: React.FC<HeaderProps> = ({
                   alert('ই-পেপার সংস্করণ শীঘ্রই প্রকাশিত হবে!');
                 }
               }}
-              className={`flex items-center gap-1.5 text-xs font-semibold transition-all px-3 py-1 rounded cursor-pointer text-white font-bold ${
-                !hasEpaper ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-80'
-              }`}
+              className="flex items-center gap-1.5 text-xs font-semibold text-red-100 hover:text-white transition-colors px-3 py-1 rounded cursor-pointer"
             >
               ই-পেপার (E-Paper)
             </button>
