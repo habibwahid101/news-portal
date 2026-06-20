@@ -126,8 +126,8 @@ export const Header: React.FC<HeaderProps> = ({
                   alert('ই-পেপার সংস্করণ শীঘ্রই প্রকাশিত হবে!');
                 }
               }}
-              className={`flex items-center gap-1.5 text-xs font-semibold hover:text-white transition-all bg-red-900/35 hover:bg-red-900/60 px-3 py-1 rounded border border-red-800/40 cursor-pointer text-white ${
-                !hasEpaper ? 'opacity-60 cursor-not-allowed' : ''
+              className={`flex items-center gap-1.5 text-xs font-semibold transition-all px-3 py-1 rounded cursor-pointer text-white font-bold ${
+                !hasEpaper ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-80'
               }`}
             >
               ই-পেপার (E-Paper)
@@ -187,11 +187,11 @@ export const Header: React.FC<HeaderProps> = ({
       <div id="navbar-el" className="bg-primary sticky top-0 z-50 shadow-md">
 
         {/* MOBILE TOP ROW: hamburger | logo | search */}
-        <div className="flex md:hidden items-center justify-between px-3 py-2 border-b border-red-900/30">
+        <div className="flex md:hidden items-center justify-between px-3 py-2 border-b border-red-100 bg-white">
           {/* Left: Hamburger */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-white hover:bg-black/10 rounded-lg transition-colors"
+            className="p-2 text-primary hover:bg-red-50 rounded-lg transition-colors"
           >
             {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -211,20 +211,20 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Right: Search */}
           <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
-            className="p-2 text-white hover:bg-black/10 rounded-lg transition-colors"
+            className="p-2 text-primary hover:bg-red-50 rounded-lg transition-colors"
           >
             <Search size={22} />
           </button>
         </div>
 
         {/* MOBILE CATEGORY SCROLL ROW */}
-        <div className="flex md:hidden overflow-x-auto no-scrollbar px-2 py-1.5 gap-1.5">
+        <div className="flex md:hidden overflow-x-auto no-scrollbar px-2 py-2 gap-1.5 bg-white border-b border-red-100">
           <button
             onClick={() => onPageChange('home')}
             className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full border transition-colors ${
               currentPage === 'home'
-                ? 'bg-white text-primary border-white'
-                : 'bg-transparent text-white border-white/30 hover:border-white/60'
+                ? 'bg-primary text-white border-primary'
+                : 'bg-white text-primary border-primary/40 hover:border-primary'
             }`}
           >
             সব খবর
@@ -235,8 +235,8 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onCatChange(cat)}
               className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full border transition-colors ${
                 currentPage === 'category' && currentCat === cat
-                  ? 'bg-white text-primary border-white'
-                  : 'bg-transparent text-white border-white/30 hover:border-white/60'
+                  ? 'bg-primary text-white border-primary'
+                  : 'bg-white text-primary border-primary/40 hover:border-primary'
               }`}
             >
               {cat}
