@@ -31,13 +31,6 @@ export const NewsCard: React.FC<NewsCardProps> = ({ post, onClick, variant = 'gr
         </div>
         <div className="flex flex-col justify-between flex-1 min-w-0">
           <div>
-            <div className="flex flex-wrap gap-1 mb-1.5">
-              {(post.categories || [post.category]).map(cat => (
-                <span key={cat} className="text-[10px] font-bold text-primary bg-red-50 px-2 py-0.5 rounded">
-                  {cat}
-                </span>
-              ))}
-            </div>
             <h3 className="font-serif-bengali text-lg font-bold text-gray-900 line-clamp-2 leading-snug group-hover:text-primary transition-colors">
               {post.title}
             </h3>
@@ -103,13 +96,6 @@ export const NewsCard: React.FC<NewsCardProps> = ({ post, onClick, variant = 'gr
       {/* Text — right on mobile, below on desktop */}
       <div className="p-3 md:p-4 flex-1 flex flex-col justify-between min-w-0">
         <div>
-          <div className="flex flex-wrap gap-1 mb-1.5 md:mb-2">
-            {(post.categories || [post.category]).map(cat => (
-              <span key={cat} className="text-[10px] font-bold text-primary bg-red-50 px-2 py-0.5 rounded">
-                {cat}
-              </span>
-            ))}
-          </div>
           <h3 className="font-serif-bengali text-sm md:text-lg font-bold text-gray-900 line-clamp-3 leading-snug group-hover:text-primary transition-colors duration-150">
             {post.title}
           </h3>

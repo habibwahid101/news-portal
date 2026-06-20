@@ -392,12 +392,11 @@ export default function App() {
                   {activeArticle.title}
                 </h1>
 
-                <div className="flex items-center gap-4 text-xs text-gray-400 font-medium bg-slate-50 p-2.5 rounded-lg border border-gray-100">
+                <div className="flex flex-col gap-1.5 text-xs text-gray-400 font-medium bg-slate-50 p-2.5 rounded-lg border border-gray-100">
                   <span className="flex items-center gap-1">
                     <Calendar size={13} className="text-gray-300" />
                     {activeArticle.date}
                   </span>
-                  <span>|</span>
                   <span className="flex items-center gap-1">
                     <User size={13} className="text-gray-300" />
                     {activeArticle.author}

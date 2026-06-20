@@ -397,12 +397,16 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
       <div className="bg-white w-full lg:max-w-7xl lg:mx-auto h-[100vh] lg:h-[90vh] lg:rounded-xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300">
         
         {/* UPPER TITLE BAR */}
-        <div className="bg-primary-dark text-white px-6 py-4 flex justify-between items-center shrink-0 border-b border-red-950">
-          <div className="flex items-center gap-3">
-            <h1 className="font-serif-bengali text-xl sm:text-2xl font-black">অপরাধ ঘোষণা — সংবাদপত্র প্রকাশনা ইঞ্জিন</h1>
+        <div className="bg-primary-dark text-white px-4 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 shrink-0 border-b border-red-950">
+          {/* Title row */}
+          <div className="flex items-center gap-2 justify-between sm:justify-start">
+            <h1 className="font-serif-bengali text-base sm:text-2xl font-black whitespace-nowrap">অপরাধ ঘোষণা — সংবাদপত্র প্রকাশনা ইঞ্জিন</h1>
             <span className="hidden sm:inline-block bg-amber-500 text-slate-950 text-xs font-bold px-2.5 py-1 rounded-full">{loggedInUser.role.toUpperCase()} প্যানেল</span>
+            {/* Close button mobile only */}
+            <button onClick={onClose} className="sm:hidden text-white/70 hover:text-white ml-auto">✕</button>
           </div>
-          <div className="flex items-center gap-3">
+          {/* Language + Logout row */}
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Language Toggle */}
             <button
               onClick={() => setLang(lang === 'bn' ? 'en' : 'bn')}
@@ -741,6 +745,20 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose, onLogout, logge
                           className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-primary bg-white text-gray-900"
                           placeholder="আকর্ষণীয় শিরোনাম লিখুন..."
                         />
+                      </div>
+
+                      {/* Author selector */}
+                      <div className="flex flex-col gap-1.5">
+                        <label className="text-xs font-bold text-gray-700">{t('সম্পাদক / লেখকের নাম', 'Author / Editor Name')}</label>
+                        <select
+                          value={currentPost.author || loggedInUser.name}
+                          onChange={e => setCurrentPost(prev => ({ ...prev, author: e.target.value }))}
+                          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-primary bg-white text-gray-900"
+                        >
+                          {users.map(u => (
+                            <option key={u.id} value={u.name}>{u.name} ({u.role})</option>
+                          ))}
+                        </select>
                       </div>
 
                       <div className="flex flex-col gap-1.5">
