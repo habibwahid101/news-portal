@@ -185,11 +185,71 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* 3. RESPONSIVE NAVIGATION BAR */}
       <div id="navbar-el" className="bg-primary sticky top-0 z-50 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-          <div className="flex items-center overflow-x-auto no-scrollbar py-0.5 flex-1 max-w-[90%]">
+
+        {/* MOBILE TOP ROW: hamburger | logo | search */}
+        <div className="flex md:hidden items-center justify-between px-3 py-2 border-b border-red-900/30">
+          {/* Left: Hamburger */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 text-white hover:bg-black/10 rounded-lg transition-colors"
+          >
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+
+          {/* Center: Logo */}
+          <div
+            onClick={() => onPageChange('home')}
+            className="cursor-pointer flex-1 flex justify-center"
+          >
+            <img
+              src={logoImg}
+              alt="অপরাধ ঘোষণা"
+              className="h-9 w-auto object-contain"
+            />
+          </div>
+
+          {/* Right: Search */}
+          <button
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
+            className="p-2 text-white hover:bg-black/10 rounded-lg transition-colors"
+          >
+            <Search size={22} />
+          </button>
+        </div>
+
+        {/* MOBILE CATEGORY SCROLL ROW */}
+        <div className="flex md:hidden overflow-x-auto no-scrollbar px-2 py-1.5 gap-1.5">
+          <button
+            onClick={() => onPageChange('home')}
+            className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full border transition-colors ${
+              currentPage === 'home'
+                ? 'bg-white text-primary border-white'
+                : 'bg-transparent text-white border-white/30 hover:border-white/60'
+            }`}
+          >
+            সব খবর
+          </button>
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => onCatChange(cat)}
+              className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full border transition-colors ${
+                currentPage === 'category' && currentCat === cat
+                  ? 'bg-white text-primary border-white'
+                  : 'bg-transparent text-white border-white/30 hover:border-white/60'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* DESKTOP NAV ROW (unchanged) */}
+        <div className="hidden md:flex max-w-7xl mx-auto px-4 items-center justify-between">
+          <div className="flex items-center overflow-x-auto no-scrollbar py-0.5 flex-1">
             <button
               onClick={() => onPageChange('home')}
-              className={`py-4 px-4 text-sm sm:text-base font-semibold text-white border-b-4 whitespace-nowrap transition-colors duration-150 ${
+              className={`py-4 px-4 text-sm font-semibold text-white border-b-4 whitespace-nowrap transition-colors duration-150 ${
                 currentPage === 'home' ? 'border-amber-400 bg-black/10' : 'border-transparent hover:bg-black/5'
               }`}
             >
@@ -199,7 +259,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 key={cat}
                 onClick={() => onCatChange(cat)}
-                className={`py-4 px-4 text-sm sm:text-base font-semibold text-white border-b-4 whitespace-nowrap transition-colors duration-150 ${
+                className={`py-4 px-4 text-sm font-semibold text-white border-b-4 whitespace-nowrap transition-colors duration-150 ${
                   currentPage === 'category' && currentCat === cat ? 'border-amber-400 bg-black/10' : 'border-transparent hover:bg-black/5'
                 }`}
               >
@@ -207,60 +267,41 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             ))}
           </div>
-
-          <div className="flex items-center gap-2">
-            {/* Search Trigger */}
-            <button
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="p-3 text-white hover:bg-black/10 rounded-full transition-colors"
-              title="খুঁজুন"
-            >
-              <Search size={20} />
-            </button>
-
-            {/* Mobile Menu Icon */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-3 text-white hover:bg-black/10 rounded-full transition-colors"
-            >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
+          <button
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
+            className="p-3 text-white hover:bg-black/10 rounded-full transition-colors"
+          >
+            <Search size={20} />
+          </button>
         </div>
 
-        {/* 4. OVERLAY SEARCH DRAWER */}
+        {/* SEARCH DRAWER */}
         {isSearchOpen && (
           <div className="bg-primary-dark border-t border-red-950 p-4 animate-in slide-in-from-top duration-200">
             <form onSubmit={handleSearchSubmit} className="max-w-3xl mx-auto flex gap-2">
               <input
+                autoFocus
                 type="text"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                placeholder="খবর খুঁজুন (যেমন: ডাকাতি, চট্টগ্রাম, কর্পোরেশন)..."
+                placeholder="খবর খুঁজুন (যেমন: ডাকাতি, চট্টগ্রাম)..."
                 className="flex-1 bg-white text-gray-900 placeholder-gray-500 rounded px-4 py-2.5 outline-none focus:ring-2 focus:ring-amber-400 text-sm"
               />
-              <button type="submit" className="bg-accent hover:bg-amber-600 text-white font-semibold px-6 py-2.5 rounded transition-colors text-sm">
-                অনুসন্ধান
+              <button type="submit" className="bg-accent hover:bg-amber-600 text-white font-semibold px-5 py-2.5 rounded transition-colors text-sm">
+                খুঁজুন
               </button>
-              <button
-                type="button"
-                onClick={() => setIsSearchOpen(false)}
-                className="text-white hover:bg-black/20 p-2.5 rounded"
-              >
+              <button type="button" onClick={() => setIsSearchOpen(false)} className="text-white hover:bg-black/20 p-2.5 rounded">
                 ✕
               </button>
             </form>
           </div>
         )}
 
-        {/* 5. MOBILE MENU DRAWER */}
+        {/* MOBILE HAMBURGER DRAWER */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-primary-dark border-t border-red-950 px-4 py-3 flex flex-col gap-1 animate-in slide-in-from-top duration-300">
+          <div className="md:hidden bg-primary-dark border-t border-red-950 px-4 py-3 flex flex-col gap-1 animate-in slide-in-from-top duration-300 max-h-[70vh] overflow-y-auto">
             <button
-              onClick={() => {
-                onPageChange('home');
-                setIsMobileMenuOpen(false);
-              }}
+              onClick={() => { onPageChange('home'); setIsMobileMenuOpen(false); }}
               className="w-full text-left py-2.5 px-3 text-white font-medium hover:bg-black/10 rounded"
             >
               সব খবর
@@ -268,10 +309,7 @@ export const Header: React.FC<HeaderProps> = ({
             {categories.map(cat => (
               <button
                 key={cat}
-                onClick={() => {
-                  onCatChange(cat);
-                  setIsMobileMenuOpen(false);
-                }}
+                onClick={() => { onCatChange(cat); setIsMobileMenuOpen(false); }}
                 className="w-full text-left py-2.5 px-3 text-white font-medium hover:bg-black/10 rounded"
               >
                 {cat}
