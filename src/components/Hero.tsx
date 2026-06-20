@@ -42,13 +42,6 @@ export const Hero: React.FC<HeroProps> = ({ posts, onArticleClick }) => {
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-5 sm:p-8">
-          <div className="flex flex-wrap gap-1.5 mb-2.5">
-            {(main.categories || [main.category]).map(cat => (
-              <span key={cat} className="bg-primary text-white text-xs font-bold px-3 py-1 rounded">
-                {cat}
-              </span>
-            ))}
-          </div>
           <h2 className="font-serif-bengali text-2xl sm:text-3xl lg:text-4xl text-white font-extrabold leading-snug tracking-tight text-shadow-md group-hover:text-amber-200 transition-colors duration-150">
             {main.title}
           </h2>
@@ -83,13 +76,6 @@ export const Hero: React.FC<HeroProps> = ({ posts, onArticleClick }) => {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex flex-col justify-end p-4">
-                <div className="flex flex-wrap gap-1 mb-1.5">
-                  {(side.categories || [side.category]).map(cat => (
-                    <span key={cat} className="bg-primary text-white text-[9px] font-bold px-2 py-0.5 rounded">
-                      {cat}
-                    </span>
-                  ))}
-                </div>
                 <h3 className="font-serif-bengali text-sm sm:text-base text-white font-bold leading-snug line-clamp-2 group-hover:text-amber-200 transition-colors duration-150">
                   {side.title}
                 </h3>
