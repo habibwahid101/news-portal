@@ -202,7 +202,7 @@ export const Header: React.FC<HeaderProps> = ({
             <img
               src={logoImg}
               alt="অপরাধ ঘোষণা"
-              className="h-9 w-auto object-contain"
+              className="h-7 w-auto object-contain"
             />
           </div>
 
