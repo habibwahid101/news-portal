@@ -127,7 +127,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }
               }}
               className={`flex items-center gap-1.5 text-xs font-semibold hover:text-white transition-all bg-red-900/35 hover:bg-red-900/60 px-3 py-1 rounded border border-red-800/40 cursor-pointer ${
-                hasEpaper ? 'text-accent' : 'text-red-300 opacity-60 cursor-not-allowed'
+                hasEpaper ? 'text-red-100' : 'text-red-100 opacity-60 cursor-not-allowed'
               }`}
             >
               📰 ই-পেপার (E-Paper)
