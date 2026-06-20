@@ -126,18 +126,18 @@ export const Header: React.FC<HeaderProps> = ({
                   alert('ই-পেপার সংস্করণ শীঘ্রই প্রকাশিত হবে!');
                 }
               }}
-              className={`flex items-center gap-1.5 text-xs font-semibold hover:text-white transition-all bg-red-900/35 hover:bg-red-900/60 px-3 py-1 rounded border border-red-800/40 cursor-pointer ${
-                hasEpaper ? 'text-red-100' : 'text-red-100 opacity-60 cursor-not-allowed'
+              className={`flex items-center gap-1.5 text-xs font-semibold hover:text-white transition-all bg-red-900/35 hover:bg-red-900/60 px-3 py-1 rounded border border-red-800/40 cursor-pointer text-white ${
+                !hasEpaper ? 'opacity-60 cursor-not-allowed' : ''
               }`}
             >
-              📰 ই-পেপার (E-Paper)
+              ই-পেপার (E-Paper)
             </button>
           </div>
         </div>
       </div>
 
-      {/* 2. MAIN HEADER (BRANDING & BANNER ADS) */}
-      <div id="main-header-el" className="max-w-7xl mx-auto px-4 py-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center border-b border-gray-100">
+      {/* 2. MAIN HEADER (BRANDING & BANNER ADS) — hidden on mobile since logo is in navbar */}
+      <div id="main-header-el" className="hidden md:grid max-w-7xl mx-auto px-4 py-5 grid-cols-1 lg:grid-cols-12 gap-6 items-center border-b border-gray-100">
         <div className="lg:col-span-12 xl:col-span-5 flex flex-col items-center lg:items-center xl:items-start text-center">
           <div
             onClick={() => onPageChange('home')}
