@@ -397,10 +397,6 @@ export default function App() {
                     <Calendar size={13} className="text-gray-300" />
                     {activeArticle.date}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <User size={13} className="text-gray-300" />
-                    {activeArticle.author}
-                  </span>
                 </div>
 
                 <div className="w-full overflow-hidden rounded-lg bg-gray-100 border border-gray-150 relative pb-[56.25%]">

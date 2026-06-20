@@ -43,11 +43,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({ post, onClick, variant = 'gr
               <Calendar size={12} className="text-gray-300" />
               {post.date}
             </span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <User size={12} className="text-gray-300" />
-              {post.author}
-            </span>
+
           </div>
         </div>
       </div>
@@ -108,11 +104,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({ post, onClick, variant = 'gr
             <Calendar size={11} className="text-gray-300" />
             {post.date}
           </span>
-          <span className="text-gray-200 hidden md:inline">•</span>
-          <span className="hidden md:flex items-center gap-1 font-medium">
-            <User size={11} className="text-gray-300" />
-            {post.author}
-          </span>
+
         </div>
       </div>
     </div>
